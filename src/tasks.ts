@@ -5,7 +5,7 @@ import {
     getTaskResultsDisplay,
 } from "./utils";
 
-import ERC20FakeFactory from '../artifacts/contracts/ERC20FakeFactory.sol/ERC20FakeFactory.json';
+import ERC20FakeFactory from "../artifacts/contracts/ERC20FakeFactory.sol/ERC20FakeFactory.json";
 
 import type { TaskResults } from "./types/types";
 import type { HardhatRuntimeEnvironment } from "hardhat/types";
@@ -25,7 +25,7 @@ export async function deployTokens(_: any, hre: HardhatRuntimeEnvironment) {
     const contractFactory = new ethers.ContractFactory(
         ERC20FakeFactory.abi,
         ERC20FakeFactory.bytecode,
-		accounts[0]
+        accounts[0]
     );
 
     const spinner = ora();
@@ -42,11 +42,15 @@ export async function deployTokens(_: any, hre: HardhatRuntimeEnvironment) {
             token.defaultMintAmount ?? fakeERC20Network.defaultMintAmount;
         let initialUsers = getInitialUserData(accounts, initialMintAmount);
 
+        // Use 18 decimals by default, which is the OpenZeppelin default for ERC20 tokens
+        const decimals = token.decimals !== undefined ? token.decimals : 18;
+
         //Deploy the token and wait until it is mined on the local network
         try {
             let contract = await contractFactory.deploy(
                 token.name,
                 token.symbol,
+                decimals,
                 initialUsers
             );
 

@@ -10,10 +10,12 @@ const config: HardhatUserConfig = {
             {
                 name: "Gold Token",
                 symbol: "GOLD",
+                decimals: 2,
             },
             {
                 name: "Silver Token",
                 symbol: "SILVER",
+                decimals: 6,
             },
         ],
     },

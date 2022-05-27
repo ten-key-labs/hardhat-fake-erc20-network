@@ -6,6 +6,7 @@ export interface FakeERC20Network {
 export interface Token {
     name: string;
     symbol: string;
+    decimals?: number;
     defaultMintAmount?: string;
 }
 

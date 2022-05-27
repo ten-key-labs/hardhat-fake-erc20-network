@@ -11,6 +11,7 @@ export const defaultSettings = {
         {
             name: "Fake ERC20 Token",
             symbol: "FAKE",
+            decimals: 18,
         },
     ],
     defaultMintAmount: "1000000000000000000000",
